@@ -2,6 +2,8 @@
 
 #### Version: 0.1.0
 
+[![Build Status](https://travis-ci.org/ideasonpurpose/wp-google-analytics.svg?branch=master)](https://travis-ci.org/ideasonpurpose/wp-google-analytics) 
+
 The goal of this package is to help remove development noise from collected stats by only injecting Google Analytics when no users are logged in. For development tasks with `WP_DEBUG` set to true, tracking code is injected using a fallback UA-xxx tracking ID. 
 
 Analytics code will only be injected when `is_user_logged_in` is false. We're interested in visitor traffic, not author or developer traffic. For sites with lower traffic, this can make a real difference.
