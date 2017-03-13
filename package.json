@@ -1,0 +1,20 @@
+{
+  "name": "wp-google-analytics",
+  "version": "0.0.1",
+  "description": "Adds a wp_head action to inject Google analytics code snippets",
+  "main": "index.js",
+  "scripts": {
+    "watch": "watch -f '**/*.php' -r 'phpunit --colors=always tests'",
+    "test": "phpunit --colors=always tests"
+  },
+  "keywords": [
+    "WordPress",
+    "Google",
+    "Analytics"
+  ],
+  "author": "Joe Maller <joe@joemaller.com> (http://www.joemaller.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "cli-watch": "^1.0.6"
+  }
+}
