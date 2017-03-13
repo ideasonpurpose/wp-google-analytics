@@ -10,10 +10,10 @@
         }
     ],
     "require": {},
-    "require-dev": {}
+    "require-dev": {},
     "autoload": {
         "psr-4": {
-            // "ideasonpurpose\\": "./"
+            "ideasonpurpose\\": ""
         }
     }
 }
