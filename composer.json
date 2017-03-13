@@ -1,7 +1,7 @@
 {
-    "name": "ideasonpurpose/wp-vimeo-embed",
-    "description": "Inject Google Analytics",
-    "license": "ISC",
+    "name": "ideasonpurpose/wp-google-analytics",
+    "description": "Adds a wp_head action to inject Google analytics code snippets",
+    "license": "MIT",
     "keywords": ["wordpress", "vimeo", "video", "Ideas On Purpose"],
     "authors": [
         {

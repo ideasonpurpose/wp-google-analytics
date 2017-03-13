@@ -14,7 +14,7 @@
     "Analytics"
   ],
   "author": "Joe Maller <joe@joemaller.com> (http://www.joemaller.com)",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "cli-watch": "^1.0.6",
     "version-everything": "^0.1.1"
