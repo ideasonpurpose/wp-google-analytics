@@ -1,6 +1,6 @@
 {
   "name": "wp-google-analytics",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Adds a wp_head action to inject Google analytics code snippets",
   "main": "index.js",
   "scripts": {

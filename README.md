@@ -1,6 +1,6 @@
 # wp-google-analytics
 
-#### Version: 0.0
+#### Version: 0.1.0
 
 The goal of this package is to help remove development noise from collected stats by only injecting Google Analytics when no users are logged in. For development tasks with `WP_DEBUG` set to true, tracking code is injected using a fallback UA-xxx tracking ID. 
 
