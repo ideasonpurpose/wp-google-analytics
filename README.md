@@ -1,6 +1,6 @@
 # wp-google-analytics
 
-#### Version: 0.1.0
+#### Version: 0.1.1
 
 [![Build Status](https://travis-ci.org/ideasonpurpose/wp-google-analytics.svg?branch=master)](https://travis-ci.org/ideasonpurpose/wp-google-analytics) 
 
