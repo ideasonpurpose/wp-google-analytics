@@ -4,8 +4,9 @@
   "description": "Adds a wp_head action to inject Google analytics code snippets",
   "main": "index.js",
   "scripts": {
-    "watch": "watch -f '**/*.php' -r 'phpunit --colors=always tests'",
-    "test": "phpunit --colors=always tests"
+    "test": "phpunit --colors=always tests",
+    "version": "version-everything && git add -u",
+    "watch": "watch -f '**/*.php' -r 'phpunit --colors=always tests'"
   },
   "keywords": [
     "WordPress",
