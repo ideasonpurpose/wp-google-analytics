@@ -14,7 +14,7 @@ When `is_user_logged_in()` is false, tracking code will be injected with either 
 
 This library is not on Packagist yet, so Composer needs to be told where to find it. Add this to the `composer.json` `repositories` key:
 
-```
+```json
   "repositories": [
     {
       "type": "vcs",
@@ -30,14 +30,14 @@ $ composer require ideasonpurpose/wp-gooogle-analytics
 ```
 
 Then initialize the code with a primary and fallback tracking ID:
-```
+```php
 use ideasonpurpose/GoogleAnalytics;
 
 new GoogleAnalytics('UA-000000-1', 'UA-000000-2');
 ```
 
 For the sake of future maintenance, it's a good idea to break the tracking IDs out into descriptive variables:
-```
+```php
 $client_prod_id = 'UA-000000-1';
 $local_dev_id = 'UA-000000-2';
 new GoogleAnalytics($client_prod_id, $local_dev_id);
