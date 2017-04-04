@@ -1,5 +1,5 @@
 {
-  "name": "wp-google-analytics",
+  "name": "wp-googleanalytics",
   "version": "0.1.1",
   "description": "Adds a wp_head action to inject Google analytics code snippets",
   "main": "index.js",
@@ -18,5 +18,17 @@
   "devDependencies": {
     "cli-watch": "^1.0.6",
     "version-everything": "^0.1.1"
-  }
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ideasonpurpose/wp-googleanalytics.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ideasonpurpose/wp-googleanalytics/issues"
+  },
+  "homepage": "https://github.com/ideasonpurpose/wp-googleanalytics#readme"
 }
