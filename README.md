@@ -1,8 +1,8 @@
-# wp-google-analytics
+# wp-googleanalytics
 
 #### Version: 0.2.0
 
-[![Build Status](https://travis-ci.org/ideasonpurpose/wp-google-analytics.svg?branch=master)](https://travis-ci.org/ideasonpurpose/wp-google-analytics) 
+[![Build Status](https://travis-ci.org/ideasonpurpose/wp-googleanalytics.svg?branch=master)](https://travis-ci.org/ideasonpurpose/wp-googleanalytics) 
 
 The goal of this package is to help remove development noise from collected stats by only injecting Google Analytics when no users are logged in. For development tasks where `WP_DEBUG` set to true, tracking code will be injected using a fallback `UA-xxxx` tracking ID. 
 
@@ -18,7 +18,7 @@ This library is not on Packagist yet, so Composer needs to be told where to find
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/ideasonpurpose/wp-google-analytics"
+      "url": "https://github.com/ideasonpurpose/wp-googleanalytics"
     }
   ]
 ```
@@ -26,7 +26,7 @@ This library is not on Packagist yet, so Composer needs to be told where to find
 Then tell Composer to load the package:
 
 ```
-$ composer require ideasonpurpose/wp-gooogle-analytics
+$ composer require ideasonpurpose/wp-gooogleanalytics
 ```
 
 Then initialize the code with a primary and fallback tracking ID:
@@ -36,7 +36,7 @@ use ideasonpurpose/GoogleAnalytics;
 new GoogleAnalytics('UA-000000-1', 'UA-000000-2');
 ```
 
-For the sake of future maintenance, it's a good idea to break the tracking IDs out into descriptive variables:
+For the sake of future maintenance, it's a not a bad idea to store tracking IDs in descriptive variables:
 ```php
 $client_prod_id = 'UA-000000-1';
 $local_dev_id = 'UA-000000-2';
