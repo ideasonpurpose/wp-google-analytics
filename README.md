@@ -3,6 +3,7 @@
 #### Version: 0.2.0
 
 [![Build Status](https://travis-ci.org/ideasonpurpose/wp-googleanalytics.svg?branch=master)](https://travis-ci.org/ideasonpurpose/wp-googleanalytics) 
+[![Coverage Status](https://coveralls.io/repos/github/ideasonpurpose/wp-googleanalytics/badge.svg?branch=master)](https://coveralls.io/github/ideasonpurpose/wp-googleanalytics?branch=master)
 
 The goal of this package is to help remove development noise from collected stats by only injecting Google Analytics when no users are logged in. For development tasks where `WP_DEBUG` set to true, tracking code will be injected using a fallback `UA-xxxx` tracking ID. 
 
