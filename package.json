@@ -1,6 +1,6 @@
 {
   "name": "wp-googleanalytics",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Adds a wp_head action to inject Google analytics code snippets",
   "scripts": {
     "test": "phpunit --colors=always tests",
