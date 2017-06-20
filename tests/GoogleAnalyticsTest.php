@@ -4,7 +4,7 @@ namespace ideasonpurpose;
 
 use PHPUnit\Framework\TestCase;
 
-require_once(realpath(__DIR__ . '/../GoogleAnalytics.php'));
+require_once(realpath(__DIR__ . '/../src/GoogleAnalytics.php'));
 require_once('GoogleAnalyticsMocks.php');
 
 // define('WP_DEBUG', true);
