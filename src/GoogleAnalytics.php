@@ -11,28 +11,18 @@ class GoogleAnalytics
      */
     public function __construct($ga_ua, $fallback_ua = 'UA-000000-2')
     {
-        $this->ua = (is_user_logged_in()) ? false : $ga_ua;
-        $this->ua = (defined('WP_DEBUG') && WP_DEBUG) ? $fallback_ua : $this->ua;
-        if ($this->ua) {
-            add_action('wp_head', [$this, 'injectGoogleAnalytics']);
-        }
+        $this->ua = (defined('WP_DEBUG') && WP_DEBUG) ? $fallback_ua : $ga_ua;
+        add_action('wp_head', [$this, 'injectGoogleAnalytics']);
     }
 
     public function injectGoogleAnalytics()
     {
-    ?>
-
-<script>/* eslint-disable */
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', '<?= $this->ua ?>', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-    <?php
+        if (is_user_logged_in()) {
+            $user = wp_get_current_user()->user_login;
+            $snippet = "<!-- User '$user' is logged in. Google Analytics snippet suppressed. -->\n";
+        } else {
+            $snippet = str_replace('UA_PLACEHOLDER', $this->ua, file_get_contents(__DIR__ . '/snippet.html'));
+        }
+        echo "\n$snippet\n";
     }
 }
