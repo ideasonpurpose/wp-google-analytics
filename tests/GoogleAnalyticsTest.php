@@ -12,7 +12,9 @@ class GoogleAnalyticsGeneralTest extends TestCase
 
     protected function setUp()
     {
-        $user = (object) ['user_login' => 'bobby'];
+        // $user = (object) ['user_login' => 'bobby'];  // doesn't work with hhvm?
+        $user = new \stdClass();
+        $user->user_login = 'bobby';
         Functions\when('is_user_logged_in')->justReturn(false);
         Functions\when('wp_get_current_user')->justReturn($user);
         parent::setUp();
