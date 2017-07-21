@@ -2,15 +2,22 @@
 
 namespace ideasonpurpose;
 
-use PHPUnit\Framework\TestCase;
-
-require_once(realpath(__DIR__ . '/../src/GoogleAnalytics.php'));
-require_once('GoogleAnalyticsMocks.php');
-
-// define('WP_DEBUG', true);
+use TestCase;
+use Mockery;
+use Brain\Monkey\Functions;
+use Brain\Monkey\Actions;
 
 class GoogleAnalyticsGeneralTest extends TestCase
 {
+
+    protected function setUp()
+    {
+        $user = (object) ['user_login' => 'bobby'];
+        Functions\when('is_user_logged_in')->justReturn(false);
+        Functions\when('wp_get_current_user')->justReturn($user);
+        parent::setUp();
+    }
+
     /**
      * @runInSeparateProcess
      * @preserveGlobalState disabled
@@ -37,9 +44,7 @@ class GoogleAnalyticsGeneralTest extends TestCase
      */
     public function testMockUserIsLoggedIn()
     {
-        global $logged_in;
-
-        $logged_in = true;
+        Functions\when('is_user_logged_in')->justReturn(true);
         $this->assertTrue(is_user_logged_in());
     }
 
@@ -49,9 +54,6 @@ class GoogleAnalyticsGeneralTest extends TestCase
      */
     public function testMockUserIsLoggedOut()
     {
-        global $logged_in;
-
-        $logged_in = false;
         $this->assertFalse(is_user_logged_in());
     }
 
@@ -62,6 +64,7 @@ class GoogleAnalyticsGeneralTest extends TestCase
     public function testInjectGA()
     {
         $ga = new GoogleAnalytics('UA-primary', 'UA-fallback');
+        $ga->injectGoogleAnalytics();
         $this->expectOutputRegex('/function\(i,s,o,g,r,a,m\)\{i\[\'GoogleAnalyticsObject/');
     }
 
@@ -73,6 +76,7 @@ class GoogleAnalyticsGeneralTest extends TestCase
     {
         define('WP_DEBUG', true);
         $ga = new GoogleAnalytics('UA-primary', 'UA-fallback');
+        $ga->injectGoogleAnalytics();
         $this->expectOutputRegex('/UA-fallback/');
     }
 
@@ -82,10 +86,9 @@ class GoogleAnalyticsGeneralTest extends TestCase
      */
     public function testInjectGAPrimary()
     {
-        global $logged_in;
-        $logged_in = false;
         define('WP_DEBUG', false);
         $ga = new GoogleAnalytics('UA-primary', 'UA-fallback');
+        $ga->injectGoogleAnalytics();
         $this->expectOutputRegex('/UA-primary/');
     }
 
@@ -95,11 +98,10 @@ class GoogleAnalyticsGeneralTest extends TestCase
      */
     public function testNoInject()
     {
-        global $logged_in;
-        $logged_in = true;
         define('WP_DEBUG', false);
+        Functions\when('is_user_logged_in')->justReturn(true);
         $ga = new GoogleAnalytics('UA-primary', 'UA-fallback');
-        $this->expectOutputString('');
+        $ga->injectGoogleAnalytics();
+        $this->expectOutputRegex('/<!-- User .* suppressed. -->/');
     }
 }
-
