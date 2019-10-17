@@ -7,9 +7,9 @@ class GoogleAnalytics
     /**
      * Add action to wp_head which injects the Google analytics code snippet
      * @param string $ga_ua       The Google Analytics tracking ID
-     * @param string $fallback_ua A placeholder ID for use in development
+     * @param string $fallback_ua A placeholder ID for use in development (UA-2565788-3 is IOP's testing ID)
      */
-    public function __construct($ga_ua, $fallback_ua = 'UA-000000-2')
+    public function __construct($ga_ua, $fallback_ua = 'UA-2565788-3')
     {
         $this->ua = (defined('WP_DEBUG') && WP_DEBUG) ? $fallback_ua : $ga_ua;
         add_action('wp_head', [$this, 'injectGoogleAnalytics']);
