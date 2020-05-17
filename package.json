@@ -16,7 +16,10 @@
     "url": "git+https://github.com/ideasonpurpose/wp-googleanalytics.git"
   },
   "license": "MIT",
-  "author": "Joe Maller <joe@joemaller.com> (http://www.joemaller.com)",
+  "author": "Ideas On Purpose (https://www.ideasonpurpose.com)",
+  "contributors": [
+    "Joe Maller <joe@ideasonpurpose.com>"
+  ],
   "directories": {
     "test": "tests"
   },
@@ -47,11 +50,13 @@
     "version-everything": "^0.6.3"
   },
   "auto-changelog": {
-    "package": true
+    "package": true,
+    "commitLimit": 7
   },
   "version-everything": {
     "files": [
-      "README.md"
+      "README.md",
+      "composer.json"
     ]
   }
 }
