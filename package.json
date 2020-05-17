@@ -2,32 +2,56 @@
   "name": "wp-googleanalytics",
   "version": "0.3.0",
   "description": "Adds a wp_head action to inject Google analytics code snippets",
-  "scripts": {
-    "test": "phpunit --colors=always tests",
-    "version": "version-everything && git add -u",
-    "watch": "watch -f '**/*.php' -r 'phpunit --colors=always tests'"
-  },
   "keywords": [
     "WordPress",
     "Google",
     "Analytics"
   ],
-  "author": "Joe Maller <joe@joemaller.com> (http://www.joemaller.com)",
-  "license": "MIT",
-  "devDependencies": {
-    "cli-watch": "^1.0.6",
-    "version-everything": "^0.1.1"
+  "homepage": "https://github.com/ideasonpurpose/wp-googleanalytics#readme",
+  "bugs": {
+    "url": "https://github.com/ideasonpurpose/wp-googleanalytics/issues"
   },
-  "directories": {
-    "test": "tests"
-  },
-  "dependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ideasonpurpose/wp-googleanalytics.git"
   },
-  "bugs": {
-    "url": "https://github.com/ideasonpurpose/wp-googleanalytics/issues"
+  "license": "MIT",
+  "author": "Joe Maller <joe@joemaller.com> (http://www.joemaller.com)",
+  "directories": {
+    "test": "tests"
   },
-  "homepage": "https://github.com/ideasonpurpose/wp-googleanalytics#readme"
+  "scripts": {
+    "test": "phpunit --colors=always tests",
+    "version": "version-everything && auto-changelog && git add -u",
+    "watch": "watch -f '**/*.php' -r 'phpunit --colors=always tests'"
+  },
+  "prettier": {
+    "overrides": [
+      {
+        "files": "*.php",
+        "options": {
+          "phpVersion": "7.2",
+          "printWidth": 120,
+          "singleQuote": true,
+          "tabWidth": 4,
+          "trailingCommaPHP": true
+        }
+      }
+    ]
+  },
+  "devDependencies": {
+    "@prettier/plugin-php": "^0.14.0",
+    "auto-changelog": "^2.0.0",
+    "cli-watch": "^1.0.7",
+    "prettier": "^2.0.5",
+    "version-everything": "^0.6.3"
+  },
+  "auto-changelog": {
+    "package": true
+  },
+  "version-everything": {
+    "files": [
+      "README.md"
+    ]
+  }
 }
