@@ -2,108 +2,81 @@
 
 namespace IdeasOnPurpose;
 
-use TestCase;
-use Mockery;
-use Brain\Monkey\Functions;
-use Brain\Monkey\Actions;
+use PHPUnit\Framework\TestCase;
+use IdeasOnPurpose\WP\Test;
 
+Test\Stubs::init();
+
+/**
+ * @covers \IdeasOnPurpose\GoogleAnalytics
+ */
 class GoogleAnalyticsGeneralTest extends TestCase
 {
-
-    protected function setUp()
+    public function setUp(): void
     {
-        // $user = (object) ['user_login' => 'bobby'];  // doesn't work with hhvm?
-        $user = new \stdClass();
-        $user->user_login = 'bobby';
-        Functions\when('is_user_logged_in')->justReturn(false);
-        Functions\when('wp_get_current_user')->justReturn($user);
-        parent::setUp();
+        $this->primary = 'UA-123456';
+        $this->fallback = 'UA-987654';
     }
 
-    /**
-     * @runInSeparateProcess
-     * @preserveGlobalState disabled
-     */
-    public function testWP_DEBUGTrue()
-    {
-        define('WP_DEBUG', true);
-        $this->assertTrue(WP_DEBUG);
-    }
-
-    /**
-     * @runInSeparateProcess
-     * @preserveGlobalState disabled
-     */
-    public function testWP_DEBUGFalse()
-    {
-        define('WP_DEBUG', false);
-        $this->assertFalse(WP_DEBUG);
-    }
-
-    /**
-     * @runInSeparateProcess
-     * @preserveGlobalState disabled
-     */
-    public function testMockUserIsLoggedIn()
-    {
-        Functions\when('is_user_logged_in')->justReturn(true);
-        $this->assertTrue(is_user_logged_in());
-    }
-
-    /**
-     * @runInSeparateProcess
-     * @preserveGlobalState disabled
-     */
-    public function testMockUserIsLoggedOut()
-    {
-        $this->assertFalse(is_user_logged_in());
-    }
-
-    /**
-     * @runInSeparateProcess
-     * @preserveGlobalState disabled
-     */
     public function testInjectGA()
     {
         $ga = new GoogleAnalytics('UA-primary', 'UA-fallback');
         $ga->injectGoogleAnalytics();
-        $this->expectOutputRegex('/function\(i,s,o,g,r,a,m\)\{i\[\'GoogleAnalyticsObject/');
+        $this->expectOutputRegex('/gtag.js/');
+        $output = $this->getActualOutput();
+        $this->assertStringContainsString('<!-- Global site tag (gtag.js) - Google Analytics -->', $output);
     }
 
-    /**
-     * @runInSeparateProcess
-     * @preserveGlobalState disabled
-     */
     public function testInjectGAFallback()
     {
-        define('WP_DEBUG', true);
-        $ga = new GoogleAnalytics('UA-primary', 'UA-fallback');
+        $ga = new GoogleAnalytics($this->primary, $this->fallback);
+        $ga->is_debug = true;
         $ga->injectGoogleAnalytics();
-        $this->expectOutputRegex('/UA-fallback/');
+        $this->expectOutputRegex('/gtag.js/');
+        $output = $this->getActualOutput();
+        $this->assertStringContainsString($this->fallback, $output);
     }
 
-    /**
-     * @runInSeparateProcess
-     * @preserveGlobalState disabled
-     */
     public function testInjectGAPrimary()
     {
-        define('WP_DEBUG', false);
-        $ga = new GoogleAnalytics('UA-primary', 'UA-fallback');
+        $ga = new GoogleAnalytics($this->primary, $this->fallback);
+        $ga->is_debug = false;
         $ga->injectGoogleAnalytics();
-        $this->expectOutputRegex('/UA-primary/');
+        $this->expectOutputRegex('/gtag.js/');
+        $output = $this->getActualOutput();
+        $this->assertStringContainsString($this->primary, $output);
     }
 
-    /**
-     * @runInSeparateProcess
-     * @preserveGlobalState disabled
-     */
     public function testNoInject()
     {
-        define('WP_DEBUG', false);
-        Functions\when('is_user_logged_in')->justReturn(true);
-        $ga = new GoogleAnalytics('UA-primary', 'UA-fallback');
+        global $is_user_logged_in;
+        $is_user_logged_in = true;
+        $ga = new GoogleAnalytics($this->primary, $this->fallback);
         $ga->injectGoogleAnalytics();
         $this->expectOutputRegex('/<!-- User .* suppressed. -->/');
+    }
+
+    public function testWithMock()
+    {
+        global $is_user_logged_in;
+
+        /** @var \IdeasOnPurpose\GoogleAnalytics $GA */
+        $GA = $this->getMockBuilder('\IdeasOnPurpose\GoogleAnalytics')
+            ->disableOriginalConstructor()
+            ->addMethods([])
+            ->getMock();
+
+        $is_user_logged_in = false;
+
+        $GA->ga_ua = $this->primary;
+        $GA->fallback_ua = $this->fallback;
+        $GA->is_debug = false;
+        $GA->injectGoogleAnalytics();
+
+        $expected = $this->primary;
+        $actual = $this->getActualOutput();
+        $this->expectOutputRegex('/gtag.js/');
+
+        $this->assertStringContainsString($expected, $actual);
     }
 }

@@ -1,23 +1,40 @@
 {
-    "name": "ideasonpurpose/wp-googleanalytics",
-    "description": "Adds a wp_head action to inject Google analytics code snippets",
-    "license": "MIT",
-    "keywords": ["wordpress", "plugin", "google", "google analytics", "analytics", "Ideas On Purpose"],
-    "authors": [
-        {
-            "name": "Joe Maller",
-            "email": "joe@ideasonpurpose.com"
-        }
-    ],
-    "require": {},
-    "require-dev": {
-        "phpunit/phpunit": "^5.7",
-        "satooshi/php-coveralls": "dev-master",
-        "brain/monkey": "^2.0"
+  "name": "ideasonpurpose/wp-google-analytics",
+  "description": "Adds a wp_head action to inject Google analytics code snippets",
+  "license": "MIT",
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "google",
+    "google analytics",
+    "analytics",
+    "Ideas On Purpose"
+  ],
+  "authors": [
+    {
+      "name": "Ideas On Purpose",
+      "homepage": "https://www.ideasonpurpose.com"
     },
-    "autoload": {
-        "psr-4": {
-            "IdeasOnPurpose\\": "src"
-        }
+    {
+      "name": "Joe Maller",
+      "email": "joe@ideasonpurpose.com"
     }
+  ],
+  "config": {
+    "sort-packages": true
+  },
+  "require": {
+    "kint-php/kint": "^3.3"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5.10",
+    "php-stubs/wordpress-stubs": "^5.8",
+    "php-stubs/acf-pro-stubs": "^5.10.2",
+    "ideasonpurpose/wp-test-stubs": "dev-main@dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "IdeasOnPurpose\\": "src"
+    }
+  }
 }

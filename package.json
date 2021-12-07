@@ -1,5 +1,5 @@
 {
-  "name": "wp-googleanalytics",
+  "name": "wp-google-analytics",
   "version": "0.4.1",
   "description": "Adds a wp_head action to inject Google analytics code snippets",
   "keywords": [
@@ -7,13 +7,13 @@
     "Google",
     "Analytics"
   ],
-  "homepage": "https://github.com/ideasonpurpose/wp-googleanalytics#readme",
+  "homepage": "https://github.com/ideasonpurpose/wp-google-analytics#readme",
   "bugs": {
-    "url": "https://github.com/ideasonpurpose/wp-googleanalytics/issues"
+    "url": "https://github.com/ideasonpurpose/wp-google-analytics/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ideasonpurpose/wp-googleanalytics.git"
+    "url": "git+https://github.com/ideasonpurpose/wp-google-analytics.git"
   },
   "license": "MIT",
   "author": "Ideas On Purpose (https://www.ideasonpurpose.com)",
@@ -24,9 +24,13 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "phpunit --colors=always tests",
-    "version": "version-everything && auto-changelog && git add -u",
-    "watch": "watch -f '**/*.php' -r 'phpunit --colors=always tests'"
+    "composer": "npm run composer:install",
+    "composer:install": "docker compose run --rm composer",
+    "composer:update": "docker compose run --rm composer update",
+    "test": "docker compose run test",
+    "posttest": "replace-in-file '/<file name=\"\\/app\\//g' '<file name=\"./' coverage.xml --quiet --isRegex",
+    "test:watch": "chokidar '{src,tests}/**/*.php' -c 'npm run test'",
+    "version": "version-everything && auto-changelog && git add -u"
   },
   "prettier": {
     "overrides": [
@@ -43,11 +47,12 @@
     ]
   },
   "devDependencies": {
-    "@prettier/plugin-php": "^0.14.0",
-    "auto-changelog": "^2.0.0",
-    "cli-watch": "^1.0.7",
-    "prettier": "^2.0.5",
-    "version-everything": "^0.6.3"
+    "@prettier/plugin-php": "^0.17.6",
+    "auto-changelog": "^2.2.1",
+    "chokidar-cli": "^3.0.0",
+    "prettier": "^2.5.1",
+    "replace-in-file": "^6.3.2",
+    "version-everything": "^0.6.4"
   },
   "auto-changelog": {
     "package": true,
@@ -55,8 +60,7 @@
   },
   "version-everything": {
     "files": [
-      "README.md",
-      "composer.json"
+      "README.md"
     ]
   }
 }
