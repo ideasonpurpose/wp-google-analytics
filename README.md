@@ -4,7 +4,7 @@
 
 [![Packagist](https://badgen.net/packagist/v/ideasonpurpose/wp-google-analytics)](https://packagist.org/packages/ideasonpurpose/wp-google-analytics)
 [![codecov](https://codecov.io/gh/ideasonpurpose/wp-google-analytics/branch/master/graph/badge.svg)](https://codecov.io/gh/ideasonpurpose/wp-google-analytics)
-[![Coveralls github](https://img.shields.io/coveralls/github/ideasonpurpose/wp-google-analytics?label=Coveralls)](https://coveralls.io/github/ideasonpurpose/wp-google-analytics)
+[![Coverage Status](https://coveralls.io/repos/github/ideasonpurpose/wp-google-analytics/badge.svg?branch=master)](https://coveralls.io/github/ideasonpurpose/wp-google-analytics?branch=master)
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/ideasonpurpose/wp-google-analytics)](https://codeclimate.com/github/ideasonpurpose/wp-google-analytics)
 [![Travis Build Status](https://img.shields.io/travis/ideasonpurpose/wp-google-analytics?logo=travis)](https://travis-ci.org/ideasonpurpose/wp-google-analytics)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
@@ -20,7 +20,7 @@ When `is_user_logged_in()` is false, tracking code will be injected with either 
 This library is available on Packagist, just require it in **composer.json** to add it to the project or tell Composer to load the package:
 
 ```
-$ composer require ideasonpurpose/wp-gooogle-analytics
+$ composer require ideasonpurpose/wp-google-analytics
 ```
 
 Then initialize the code with a primary and fallback tracking ID:
