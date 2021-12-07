@@ -34,7 +34,7 @@
   },
   "autoload": {
     "psr-4": {
-      "IdeasOnPurpose\\": "src"
+      "IdeasOnPurpose\\WP\\": "src"
     }
   }
 }

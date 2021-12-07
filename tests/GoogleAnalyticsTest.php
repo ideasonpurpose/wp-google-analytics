@@ -1,6 +1,6 @@
 <?php
 
-namespace IdeasOnPurpose;
+namespace IdeasOnPurpose\WP;
 
 use PHPUnit\Framework\TestCase;
 use IdeasOnPurpose\WP\Test;
@@ -8,7 +8,7 @@ use IdeasOnPurpose\WP\Test;
 Test\Stubs::init();
 
 /**
- * @covers \IdeasOnPurpose\GoogleAnalytics
+ * @covers \IdeasOnPurpose\WP\GoogleAnalytics
  */
 class GoogleAnalyticsGeneralTest extends TestCase
 {
@@ -60,8 +60,8 @@ class GoogleAnalyticsGeneralTest extends TestCase
     {
         global $is_user_logged_in;
 
-        /** @var \IdeasOnPurpose\GoogleAnalytics $GA */
-        $GA = $this->getMockBuilder('\IdeasOnPurpose\GoogleAnalytics')
+        /** @var \IdeasOnPurpose\WP\GoogleAnalytics $GA */
+        $GA = $this->getMockBuilder('\IdeasOnPurpose\WP\GoogleAnalytics')
             ->disableOriginalConstructor()
             ->addMethods([])
             ->getMock();

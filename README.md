@@ -26,9 +26,9 @@ $ composer require ideasonpurpose/wp-gooogle-analytics
 Then initialize the code with a primary and fallback tracking ID:
 
 ```php
-use ideasonpurpose/GoogleAnalytics;
+use IdeasOnPurpose\WP\GoogleAnalytics;
 
-new GoogleAnalytics('UA-000000-1', 'UA-000000-2');
+new GoogleAnalytics("UA-000000-1", "UA-000000-2");
 ```
 
 For the sake of future maintenance, it's a good idea to store tracking IDs in descriptive variables:
