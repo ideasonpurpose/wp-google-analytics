@@ -4,9 +4,8 @@
 
 [![Packagist](https://badgen.net/packagist/v/ideasonpurpose/wp-google-analytics)](https://packagist.org/packages/ideasonpurpose/wp-google-analytics)
 [![codecov](https://codecov.io/gh/ideasonpurpose/wp-google-analytics/branch/master/graph/badge.svg)](https://codecov.io/gh/ideasonpurpose/wp-google-analytics)
-[![Coverage Status](https://coveralls.io/repos/github/ideasonpurpose/wp-google-analytics/badge.svg?branch=master)](https://coveralls.io/github/ideasonpurpose/wp-google-analytics?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/ideasonpurpose/wp-google-analytics/badge.svg)](https://coveralls.io/github/ideasonpurpose/wp-google-analytics)
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/ideasonpurpose/wp-google-analytics)](https://codeclimate.com/github/ideasonpurpose/wp-google-analytics)
-[![Travis Build Status](https://img.shields.io/travis/ideasonpurpose/wp-google-analytics?logo=travis)](https://travis-ci.org/ideasonpurpose/wp-google-analytics)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 This package adds Google Tag Manager to WordPress sites. The goal of the project is to help remove development noise from collected stats. Tracking snippets are only injected when no users are logged in, for development tasks where `WP_DEBUG` set to true, a fallback `UA-xxxx` tracking ID will be used.
