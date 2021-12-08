@@ -47,8 +47,8 @@ jobs:
       run: |
         composer require 'php-coveralls/php-coveralls:2.4.3'
         vendor/bin/php-coveralls -v
-
-    - name: CodeCov coverage
+        
+    - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v2
       with:
         fail_ci_if_error: true
@@ -63,6 +63,3 @@ jobs:
         debug: true
         coverageLocations: |
           coverage.xml:clover
-        
-        
-      #  ${{github.workspace}}/coverage.xml:clover
