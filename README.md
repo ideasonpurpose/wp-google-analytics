@@ -27,13 +27,47 @@ Then initialize the code with a primary and fallback tracking ID:
 ```php
 use IdeasOnPurpose\WP\GoogleAnalytics;
 
-new GoogleAnalytics("UA-000000-1", "UA-000000-2");
+new GoogleAnalytics("G-XYZ456", "G-JKL890");
 ```
 
 For the sake of future maintenance, it's a good idea to store tracking IDs in descriptive variables:
 
 ```php
-$client_prod_id = "UA-000000-1";
-$local_dev_id = "UA-000000-2";
+$client_prod_id = "G-XYZ456";
+$local_dev_id = "G-JKL890";
 new GoogleAnalytics($client_prod_id, $local_dev_id);
+```
+
+### Backwards compatibility with GA4 and Universal Analytics
+
+In some situations, Google recommends [injecting two snippets](https://support.google.com/analytics/answer/9744165) into the page, one for the older Universal Analytics property, and then a copy with the new GA4 property ID.
+
+Analytics ID arguments can be a single string or an array of strings. When multiple IDs are provided, a snippet will be injected for each:
+
+```php
+new GoogleAnalytics(["UA-012345-1", "G-XYZ456"], $local_dev_id);
+```
+
+Will produce something like this:
+
+```html
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-012345-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-012345-1');
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XYZ456"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XYZ456');
+</script>
 ```

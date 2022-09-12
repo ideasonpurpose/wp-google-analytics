@@ -35,10 +35,22 @@
   "prettier": {
     "overrides": [
       {
+        "files": "*.html",
+        "options": {
+          "printWidth": 120,
+          "tabWidth": 2
+        }
+      },
+      {
+        "files": "*.md",
+        "options": {
+          "embeddedLanguageFormatting": "off"
+        }
+      },
+      {
         "files": "*.php",
         "options": {
-          "phpVersion": "7.2",
-          "printWidth": 120,
+          "printWidth": 100,
           "singleQuote": true,
           "tabWidth": 4,
           "trailingCommaPHP": true
