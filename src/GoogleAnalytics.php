@@ -30,7 +30,11 @@ class GoogleAnalytics
             $snippet = "<!-- User '$user' is logged in. Google Analytics snippet suppressed. -->\n";
         } else {
             $ua = $this->is_debug ? $this->fallback_ua : $this->ga_ua;
-            $snippet = str_replace('UA_PLACEHOLDER', $ua, file_get_contents(__DIR__ . '/snippet.html'));
+            $gaIDs = is_array($ua) ? $ua : [$ua];
+            $snippet = '';
+            foreach ($gaIDs as $id) {
+                $snippet .= str_replace('UA_PLACEHOLDER', $id, file_get_contents(__DIR__ . '/snippet.html'));
+            }
         }
         echo "\n{$snippet}\n";
     }
