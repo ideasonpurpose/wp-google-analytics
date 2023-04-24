@@ -62,7 +62,7 @@
     "@prettier/plugin-php": "^0.19.0",
     "auto-changelog": "^2.4.0",
     "prettier": "^2.7.1",
-    "version-everything": "^0.9.1"
+    "version-everything": "^0.9.2"
   },
   "auto-changelog": {
     "package": true,
