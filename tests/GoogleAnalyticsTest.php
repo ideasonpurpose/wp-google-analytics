@@ -10,45 +10,45 @@ Test\Stubs::init();
 /**
  * @covers \IdeasOnPurpose\WP\GoogleAnalytics
  */
-class GoogleAnalyticsGeneralTest extends TestCase
+class GoogleAnalyticsTest extends TestCase
 {
+    public $primary = 'UA-123456';
+    public $primaryGA4 = 'G-456XYZ';
+
+    public $fallback = 'UA-987654';
+    public $fallbackGA4 = 'G-789JKL';
+
+    public $primaryIDs;
+    public $fallbackIDs;
+
     public function setUp(): void
     {
-        $this->primary = 'UA-123456';
-        $this->primaryGA4 = 'G-456XYZ';
         $this->primaryIDs = [$this->primary, $this->primaryGA4];
-        $this->fallback = 'UA-987654';
-        $this->fallbackGA4 = 'G-789JKL';
         $this->fallbackIDs = [$this->fallback, $this->fallbackGA4];
     }
 
-    public function testInjectGA()
+    public function testInjectGAPrimary()
     {
-        $ga = new GoogleAnalytics('UA-primary', 'UA-fallback');
+        global $is_user_logged_in;
+        $is_user_logged_in = false;
+        $ga = new GoogleAnalytics($this->primary, $this->fallback);
+        $ga->is_debug = false;
+        ob_start();
         $ga->injectGoogleAnalytics();
-        $this->expectOutputRegex('/gtag.js/');
-        $output = $this->getActualOutput();
-        $this->assertStringContainsString('<!-- Google tag (gtag.js) -->', $output);
+        $actual = ob_get_clean();
+        $this->assertStringContainsString('gtag.js', $actual);
+        $this->assertStringContainsString($this->primary, $actual);
     }
 
     public function testInjectGAFallback()
     {
         $ga = new GoogleAnalytics($this->primary, $this->fallback);
         $ga->is_debug = true;
+        ob_start();
         $ga->injectGoogleAnalytics();
-        $this->expectOutputRegex('/gtag.js/');
-        $output = $this->getActualOutput();
-        $this->assertStringContainsString($this->fallback, $output);
-    }
-
-    public function testInjectGAPrimary()
-    {
-        $ga = new GoogleAnalytics($this->primary, $this->fallback);
-        $ga->is_debug = false;
-        $ga->injectGoogleAnalytics();
-        $this->expectOutputRegex('/gtag.js/');
-        $output = $this->getActualOutput();
-        $this->assertStringContainsString($this->primary, $output);
+        $actual = ob_get_clean();
+        $this->assertStringContainsString('gtag.js', $actual);
+        $this->assertStringContainsString($this->fallback, $actual);
     }
 
     public function testNoInject()
@@ -56,8 +56,11 @@ class GoogleAnalyticsGeneralTest extends TestCase
         global $is_user_logged_in;
         $is_user_logged_in = true;
         $ga = new GoogleAnalytics($this->primary, $this->fallback);
+        ob_start();
         $ga->injectGoogleAnalytics();
-        $this->expectOutputRegex('/<!-- User .* suppressed. -->/');
+        $actual = ob_get_clean();
+        $this->assertMatchesRegularExpression('/<!-- User .* suppressed. -->/', $actual);
+        $this->assertStringNotContainsString('gtag.js', $actual);
     }
 
     public function testArrayOfIDs()
@@ -66,11 +69,12 @@ class GoogleAnalyticsGeneralTest extends TestCase
         $is_user_logged_in = false;
         $ga = new GoogleAnalytics($this->primaryIDs, $this->fallback);
         $ga->is_debug = false;
+        ob_start();
         $ga->injectGoogleAnalytics();
-        $this->expectOutputRegex('/gtag.js/');
-        $output = $this->getActualOutput();
-        $this->assertStringContainsString($this->primary, $output);
-        $this->assertStringContainsString($this->primaryGA4, $output);
+        $actual = ob_get_clean();
+        $this->assertStringContainsString('gtag.js', $actual);
+        $this->assertStringContainsString($this->primary, $actual);
+        $this->assertStringContainsString($this->primaryGA4, $actual);
     }
 
     public function testFallbackArrayOfIDs()
@@ -79,34 +83,11 @@ class GoogleAnalyticsGeneralTest extends TestCase
         $is_user_logged_in = false;
         $ga = new GoogleAnalytics($this->primary, $this->fallbackIDs);
         $ga->is_debug = true;
+        ob_start();
         $ga->injectGoogleAnalytics();
-        $this->expectOutputRegex('/gtag.js/');
-        $output = $this->getActualOutput();
-        $this->assertStringContainsString($this->fallback, $output);
-        $this->assertStringContainsString($this->fallbackGA4, $output);
-    }
-
-    public function testWithMock()
-    {
-        global $is_user_logged_in;
-
-        /** @var \IdeasOnPurpose\WP\GoogleAnalytics $GA */
-        $GA = $this->getMockBuilder('\IdeasOnPurpose\WP\GoogleAnalytics')
-            ->disableOriginalConstructor()
-            ->addMethods([])
-            ->getMock();
-
-        $is_user_logged_in = false;
-
-        $GA->ga_ua = $this->primary;
-        $GA->fallback_ua = $this->fallback;
-        $GA->is_debug = false;
-        $GA->injectGoogleAnalytics();
-
-        $expected = $this->primary;
-        $actual = $this->getActualOutput();
-        $this->expectOutputRegex('/gtag.js/');
-
-        $this->assertStringContainsString($expected, $actual);
+        $actual = ob_get_clean();
+        $this->assertStringContainsString('gtag.js', $actual);
+        $this->assertStringContainsString($this->fallback, $actual);
+        $this->assertStringContainsString($this->fallbackGA4, $actual);
     }
 }
