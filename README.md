@@ -1,6 +1,6 @@
 # WordPress Google Analytics Library
 
-#### Version: 1.1.1
+#### Version: 1.1.2
 
 [![Packagist](https://badgen.net/packagist/v/ideasonpurpose/wp-google-analytics)](https://packagist.org/packages/ideasonpurpose/wp-google-analytics)
 [![codecov](https://codecov.io/gh/ideasonpurpose/wp-google-analytics/branch/master/graph/badge.svg)](https://codecov.io/gh/ideasonpurpose/wp-google-analytics)
