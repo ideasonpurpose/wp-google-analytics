@@ -9,6 +9,9 @@ class GoogleAnalytics
      */
     public $is_debug = false;
 
+    public $ga_ua;
+    public $fallback_ua;
+
     /**
      * Add action to wp_head which injects the Google analytics code snippet
      * @param string $ga_ua       The Google Analytics tracking ID
