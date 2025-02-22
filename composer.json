@@ -25,7 +25,6 @@
   },
   "require-dev": {
     "ideasonpurpose/wp-test-stubs": "dev-main@dev",
-    "php-sage/sage": "^1.5",
     "php-stubs/acf-pro-stubs": "^6",
     "php-stubs/wordpress-stubs": "^6",
     "phpunit/phpunit": "^10.2"
