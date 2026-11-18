@@ -1,3 +1,7 @@
+> **Deprecated.** This package is deprecated. Use [`ThemeInit\Analytics`](https://github.com/ideasonpurpose/wp-theme-init) in [wp-theme-init](https://github.com/ideasonpurpose/wp-theme-init) instead. When `WP_DEBUG` is on, the `dev:` argument replaces the production config, so development analytics stay off unless configured.
+>
+> `new GoogleAnalytics("G-XYZ456", "G-JKL890");` → `new ThemeInit\Analytics(gtag: "G-XYZ456", dev: ["gtag" => "G-JKL890"]);`
+
 # WordPress Google Analytics Library
 
 #### Version: 1.1.2
